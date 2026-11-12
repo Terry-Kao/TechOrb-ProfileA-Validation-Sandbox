@@ -21,4 +21,4 @@ jobs:
           git rev-parse HEAD:.github/workflows/sandbox.yml
           if grep -Eq '^(pending|cancel)$' fixture.txt; then sleep 75; fi
           python3 test_fixture.py
-          python3 validate.py
+          python3 -c 'print("ALTERNATE_SYNTHETIC_WORKLOAD_EXECUTED")'

@@ -1,7 +1,7 @@
 name: Synthetic governance
 on:
   pull_request:
-    branches: [main]
+    branches: [synthetic-unmatched]
     types: [opened, synchronize, reopened, ready_for_review]
 permissions:
   contents: read

@@ -1,0 +1,24 @@
+name: Synthetic governance
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+permissions:
+  contents: read
+jobs:
+  policy:
+    name: techorb-governance-policy-integrity
+    if: github.head_ref != 'test/skip'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          persist-credentials: false
+      - name: Synthetic fixture
+        run: |
+          printf 'workflow=%s checkout=%s event=%s\n' "$GITHUB_WORKFLOW_SHA" "$(git rev-parse HEAD)" "$GITHUB_EVENT_NAME"
+          git rev-parse HEAD:.github/workflows/sandbox.yml
+          if grep -Eq '^(pending|cancel)$' fixture.txt; then sleep 75; fi
+          python3 test_fixture.py
+          python3 validate.py

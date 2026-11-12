@@ -1,2 +1,2 @@
-# TechOrb-ProfileA-Validation-Sandbox
-Public synthetic GitHub ruleset validation fixtures.
+# Synthetic Profile A fixtures
+Only synthetic GitHub ruleset inputs.
